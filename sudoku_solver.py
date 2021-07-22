@@ -1,7 +1,7 @@
 import random as rnd
 
-nr_rows = 9
-nr_cols = 9
+NR_ROWS = 9
+NR_COLS = 9
 
 nr_sols = 0
 
@@ -68,8 +68,8 @@ def is_placement_valid(num_placed, row_placed, col_placed, board):
 
 
 def find_empty_cell(board):
-    for row in range(nr_rows):
-        for col in range(nr_cols):
+    for row in range(NR_ROWS):
+        for col in range(NR_COLS):
             number = board[row][col]
 
             # Check if the cell is empty
@@ -78,17 +78,17 @@ def find_empty_cell(board):
 
 
 def display_board(board):
-    for row in range(nr_rows):
+    for row in range(NR_ROWS):
         if row % 3 == 0 and row != 0:
             print("---------------------")
 
-        for col in range(nr_cols):
+        for col in range(NR_COLS):
             number = board[row][col]
 
             if col % 3 == 0 and col != 0:
                 print("| ", end="")
 
-            if col == nr_cols - 1:
+            if col == NR_COLS - 1:
                 if number == 0:
                     print(" ")
                 else:
@@ -106,7 +106,7 @@ def deep_copy(board):
 
 def empty_board():
     # Generate an empty board
-    return [[0 for _ in range(nr_cols)] for _ in range(nr_rows)]
+    return [[0 for _ in range(NR_COLS)] for _ in range(NR_ROWS)]
 
 
 def generate_solution(board):
@@ -143,8 +143,8 @@ def generate_solution(board):
 def get_non_empty_squares(board):
     non_empty_squares = []
 
-    for row in range(nr_rows):
-        for col in range(nr_cols):
+    for row in range(NR_ROWS):
+        for col in range(NR_COLS):
             number = board[row][col]
             if number != 0:
                 non_empty_squares.append((row, col))
@@ -154,17 +154,17 @@ def get_non_empty_squares(board):
 
 def remove_numbers(board):
     # Get the non-empty squares and count them
-    nonEmptySquares = get_non_empty_squares(board)
-    numOfNonEmptySquares = len(nonEmptySquares)
+    non_empty_squares = get_non_empty_squares(board)
+    num_of_non_empty_squares = len(non_empty_squares)
 
     # Return board if the number of filled squares is 30
-    if numOfNonEmptySquares <= 30:
+    if num_of_non_empty_squares <= 30:
         return board
 
     # Shuffle the list of squares to make the removal random
-    rnd.shuffle(nonEmptySquares)
+    rnd.shuffle(non_empty_squares)
 
-    row, col = nonEmptySquares.pop()
+    row, col = non_empty_squares.pop()
 
     # Store the number before removal and then remove it
     number = board[row][col]
@@ -174,8 +174,8 @@ def remove_numbers(board):
     nr_sols = 0
 
     # Solve the copy of our original board, while counting num. of solutions
-    boardCopy = deep_copy(board)
-    solve(boardCopy, True)
+    board_copy = deep_copy(board)
+    solve(board_copy, True)
 
     # If num. of solutions is one recursively remove other numbers
     # Otherwise put the removed number back and recursively remove other numbers
